@@ -12,5 +12,6 @@ nodename="$(hostname --fqdn)"
 
 if [ -d /root/simpleansible ]; then
    cd /root/simpleansible
+   git pull
    ansible-playbook --inventory inventory --limit="$nodename" site.yml $@
 fi
