@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "x$COSMOS_VERBOSE" = "xy" ]; then
+   args="--verbose --show_diff"
+else
+   args="--logdest=syslog"
+fi
+
+nodename="$(hostname --fqdn)"
+
+if [ -d /root/simpleansible ]; then
+   cd /root/simpleansible
+   ansible-playbook --inventory inventory --limit="$nodename" site.yml $@
+fi
